@@ -3,6 +3,7 @@ var $previewImage = document.querySelector('img#preview');
 var $photoURLInput = document.querySelector('[name="photo"]');
 var $entryForm = document.querySelector('form');
 var $entryList = document.querySelector('ul');
+var $displayNoEntries = document.querySelector('#display-no-entries');
 function previewImageHandler(event) {
   $previewImage.setAttribute('src', $photoURLInput.value);
 }
@@ -54,3 +55,13 @@ function DOMContentHandler(event) {
 }
 
 document.addEventListener('DOMContentLoaded', DOMContentHandler);
+
+function toggleNoEntries() {
+  if ($displayNoEntries.getAttribute('class') !== 'hidden') {
+    $displayNoEntries.setAttribute('class', 'hidden');
+  } else {
+    $displayNoEntries.setAttribute('class', 'text-align-center');
+  }
+}
+
+toggleNoEntries();
