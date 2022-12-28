@@ -13,6 +13,7 @@ function submitHandler(event) {
   entry.entryId = data.nextEntryId;
   data.nextEntryId++;
   data.entries.push(entry);
+  $previewImage.setAttribute('src', 'images/placeholder-image-square.jpg');
 }
 $photoURLInput.addEventListener('input', previewImageHandler);
 $entryForm.addEventListener('submit', submitHandler);
