@@ -54,8 +54,14 @@ header {
   background-color: #562b81;
 }
 
+li {
+  list-style: none;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
 .cover {
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .text-align-start {
@@ -124,6 +130,7 @@ header {
 
   img {
     height: 45vh;
+    border-radius: ;
   }
 
   .margin-top-bottom {
