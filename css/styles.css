@@ -40,6 +40,11 @@ textarea {
   margin-top: 0.75rem;
 }
 
+input[type="text"]:focus,
+textarea:focus {
+  outline-color: #562b81;
+}
+
 input[type="submit"] {
   background-color: #562b81;
   color: white;
@@ -58,6 +63,19 @@ li {
   list-style: none;
   margin-bottom: 1.5rem;
   line-height: 1.5;
+}
+
+a,
+h3 {
+  display: inline-block;
+}
+
+a {
+  padding-left: 1rem;
+}
+
+a:hover {
+  cursor: pointer;
 }
 
 .cover {
@@ -124,13 +142,13 @@ li {
   }
 
   h1,
-  h3 {
+  h3,
+  a {
     padding: 0 0.75rem;
   }
 
   img {
     height: 45vh;
-    border-radius: ;
   }
 
   .margin-top-bottom {

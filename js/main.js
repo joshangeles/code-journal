@@ -25,6 +25,7 @@ var $entryList = document.querySelector('ul');
 var $displayNoEntries = document.querySelector('#display-no-entries');
 var $viewContainer = document.querySelector('main');
 var $viewList = $viewContainer.querySelectorAll('[data-view]');
+var $entriesAnchor = document.querySelector('#entries-view');
 function renderEntry(entry) {
   var $entryListItem = document.createElement('li');
   var $entryRow = document.createElement('div');
@@ -77,5 +78,10 @@ function viewSwap(currentView) {
   }
 }
 
+function swapToEntriesHandler(event) {
+  if (event) {
+    viewSwap('entries');
+  }
+}
 toggleNoEntries();
-viewSwap('entries');
+$entriesAnchor.addEventListener('click', swapToEntriesHandler);
