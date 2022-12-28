@@ -2,8 +2,6 @@
 var $previewImage = document.querySelector('img#preview');
 var $photoURLInput = document.querySelector('[name="photo"]');
 var $entryForm = document.querySelector('form');
-var $entryList = document.querySelector('ul');
-var $displayNoEntries = document.querySelector('#display-no-entries');
 function previewImageHandler(event) {
   $previewImage.setAttribute('src', $photoURLInput.value);
 }
@@ -23,6 +21,10 @@ $photoURLInput.addEventListener('input', previewImageHandler);
 $entryForm.addEventListener('submit', submitHandler);
 
 // issue-2-can-view-entries: users can view their entries
+var $entryList = document.querySelector('ul');
+var $displayNoEntries = document.querySelector('#display-no-entries');
+var $viewContainer = document.querySelector('main');
+var $viewList = $viewContainer.querySelectorAll('[data-view]');
 function renderEntry(entry) {
   var $entryListItem = document.createElement('li');
   var $entryRow = document.createElement('div');
@@ -64,4 +66,16 @@ function toggleNoEntries() {
   }
 }
 
+function viewSwap(currentView) {
+  data.view = currentView;
+  for (var viewIndex = 0; viewIndex < $viewList.length; viewIndex++) {
+    if ($viewList[viewIndex].getAttribute('data-view') === currentView) {
+      $viewList[viewIndex].className = '';
+    } else {
+      $viewList[viewIndex].className = 'hidden';
+    }
+  }
+}
+
 toggleNoEntries();
+viewSwap('entries');
