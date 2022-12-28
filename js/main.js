@@ -32,10 +32,10 @@ function renderEntry(entry) {
   $entryRow.setAttribute('class', 'row');
   $entryPhotoContainer.setAttribute('class', 'column-half');
   $entryPhoto.setAttribute('class', 'border-round');
-  $entryPhoto.setAttribute('src', data.entries[entry].photo);
+  $entryPhoto.setAttribute('src', entry.photo);
   $entryTextContainer.setAttribute('class', 'column-half');
-  $entryTitle.textContent = data.entries[entry].title;
-  $entryNotes.textContent = data.entries[entry].notes;
+  $entryTitle.textContent = entry.title;
+  $entryNotes.textContent = entry.notes;
   $entryListItem.appendChild($entryRow);
   $entryRow.appendChild($entryPhotoContainer);
   $entryPhotoContainer.appendChild($entryPhoto);
@@ -45,4 +45,9 @@ function renderEntry(entry) {
   return $entryListItem;
 }
 
-renderEntry(0);
+renderEntry({
+  title: 'Anya Forger',
+  photo: 'https://dk2dv4ezy246u.cloudfront.net/widgets/sSTwZScBgui_large.jpg',
+  notes: 'Anya Forger (アーニャ・フォージャー, Ānya Fōjā?) is the deuteragonist of the SPY x FAMILY series. Formerly known as Test Subject \'007\' (被験体\'007\', Hikentai \'007\'?), she is a telepath whose abilities were created in an experiment conducted by an unknown organization.\nShe is a student in Cecile Hall at Eden Academy and the adopted daughter of Loid Forger and Yor Forger.',
+  entryId: 1
+});
