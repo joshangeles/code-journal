@@ -1,0 +1,136 @@
+body {
+  font-family: sans-serif;
+  background-color: #f0f0f0;
+}
+
+label {
+  font-weight: bold;
+  display: block;
+}
+
+body main.container {
+  background-color: #f0f0f0;
+}
+
+img {
+  height: 25vh;
+  width: 100%;
+}
+
+form > div {
+  margin: 3% 0;
+}
+
+form > div > div label {
+  margin: 3% 0;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  height: 5vh;
+  border-radius: 0.25rem;
+  border-color: #bababa;
+  border-style: solid;
+  font-size: large;
+}
+
+textarea {
+  height: 20vh;
+  margin-top: 0.75rem;
+}
+
+input[type="submit"] {
+  background-color: #562b81;
+  color: white;
+  border-radius: 0.25rem;
+  border-color: transparent;
+  width: 22%;
+  padding: 0.5rem;
+  margin-top: 1rem;
+}
+
+header {
+  background-color: #562b81;
+}
+
+.cover {
+  object-fit: cover;
+}
+
+.text-align-start {
+  text-align: start;
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.justify-flex-end {
+  justify-content: flex-end;
+}
+
+.border-round {
+  border-radius: 3%;
+}
+
+.font-weight-normal {
+  font-weight: normal;
+}
+
+.margin-top {
+  margin-top: 2rem;
+}
+
+#header-container {
+  background-color: #562b81;
+  color: white;
+}
+
+@media screen and (min-width: 768px) {
+  input[type="submit"] {
+    padding: 0.5rem;
+    width: 4.5rem;
+    margin-top: 1rem;
+  }
+
+  div > label,
+  div > input[type="text"] {
+    display: inline;
+    margin-top: 0.5rem;
+  }
+
+  div > input[type="text"] {
+    height: 100%;
+    padding: 0.5rem 0.3rem;
+  }
+
+  textarea {
+    padding: 0.5rem;
+  }
+
+  h1,
+  h3 {
+    padding: 0 0.75rem;
+  }
+
+  img {
+    height: 45vh;
+  }
+
+  .margin-top-bottom {
+    margin: 1rem 0;
+  }
+
+  .margin-bottom {
+    margin-bottom: 2rem;
+  }
+}
