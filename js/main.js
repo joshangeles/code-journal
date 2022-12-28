@@ -12,7 +12,7 @@ function submitHandler(event) {
   entry.notes = $entryForm.elements.notes.value;
   entry.entryId = data.nextEntryId;
   data.nextEntryId++;
-  data.entries.push(entry);
+  data.entries.unshift(entry);
   $previewImage.setAttribute('src', 'images/placeholder-image-square.jpg');
   $entryForm.reset();
 }
