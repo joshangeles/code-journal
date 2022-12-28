@@ -36,6 +36,7 @@ textarea {
 
 textarea {
   height: 20vh;
+  margin-top: 0.75rem;
 }
 
 input[type="submit"] {
@@ -44,7 +45,7 @@ input[type="submit"] {
   border-radius: 0.25rem;
   border-color: transparent;
   width: 22%;
-  padding: 2% 0;
+  padding: 0.5rem;
   margin-top: 1rem;
 }
 
@@ -80,8 +81,8 @@ input[type="submit"] {
   font-weight: normal;
 }
 
-.margin-bottom {
-  margin-bottom: 2rem;
+.margin-top {
+  margin-top: 2rem;
 }
 
 #header-container {
@@ -91,16 +92,28 @@ input[type="submit"] {
 
 @media screen and (min-width: 768px) {
   input[type="submit"] {
-    width: 10%;
+    padding: 0.5rem;
+    width: 4.5rem;
     margin-top: 1rem;
   }
 
   div > label,
   div > input[type="text"] {
     display: inline;
+    margin-top: 0.5rem;
   }
 
-  h1 {
+  div > input[type="text"] {
+    height: 100%;
+    padding: 0.5rem 0.3rem;
+  }
+
+  textarea {
+    padding: 0.5rem;
+  }
+
+  h1,
+  h3 {
     padding: 0 0.75rem;
   }
 
@@ -109,6 +122,10 @@ input[type="submit"] {
   }
 
   .margin-top-bottom {
-    margin: 2rem 0;
+    margin: 1rem 0;
+  }
+
+  .margin-bottom {
+    margin-bottom: 2rem;
   }
 }
