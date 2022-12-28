@@ -10,6 +10,7 @@ function submitHandler(event) {
   entry.title = $entryForm.elements.title.value;
   entry.photo = $entryForm.elements.photo.value;
   entry.notes = $entryForm.elements.notes.value;
+  entry.entryId = data.nextEntryId;
 }
 $photoURLInput.addEventListener('input', previewImageHandler);
 $entryForm.addEventListener('submit', submitHandler);
