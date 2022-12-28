@@ -26,6 +26,7 @@ var $displayNoEntries = document.querySelector('#display-no-entries');
 var $viewContainer = document.querySelector('main');
 var $viewList = $viewContainer.querySelectorAll('[data-view]');
 var $entriesAnchor = document.querySelector('#entries-view');
+var $newEntryButton = document.querySelector('#entry-form-view');
 function renderEntry(entry) {
   var $entryListItem = document.createElement('li');
   var $entryRow = document.createElement('div');
@@ -66,7 +67,7 @@ function toggleNoEntries() {
     $displayNoEntries.setAttribute('class', 'text-align-center');
   }
 }
-
+toggleNoEntries();
 function viewSwap(currentView) {
   data.view = currentView;
   for (var viewIndex = 0; viewIndex < $viewList.length; viewIndex++) {
@@ -78,10 +79,16 @@ function viewSwap(currentView) {
   }
 }
 
-function swapToEntriesHandler(event) {
+function viewSwapHandler(event) {
   if (event) {
-    viewSwap('entries');
+    if (event.target.matches('#entries-view')) {
+      viewSwap('entries');
+    }
+    if (event.target.matches('#entry-form-view')) {
+      viewSwap('entry-form');
+    }
   }
 }
-toggleNoEntries();
-$entriesAnchor.addEventListener('click', swapToEntriesHandler);
+
+$entriesAnchor.addEventListener('click', viewSwapHandler);
+$newEntryButton.addEventListener('click', viewSwapHandler);
