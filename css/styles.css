@@ -1,5 +1,6 @@
 body {
   font-family: sans-serif;
+  background-color: #f0f0f0;
 }
 
 label {
@@ -47,6 +48,10 @@ input[type="submit"] {
   width: 22%;
   padding: 0.5rem;
   margin-top: 1rem;
+}
+
+header {
+  background-color: #562b81;
 }
 
 .cover {
