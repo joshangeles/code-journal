@@ -13,8 +13,8 @@ body main.container {
 }
 
 img {
-  height: 25vh;
-  width: 100%;
+  height: auto;
+  max-width: 100%;
 }
 
 form > div {
