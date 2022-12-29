@@ -42,6 +42,7 @@ function renderEntry(entry) {
   var $entryTitle = document.createElement('h2');
   var $entryIcon = document.createElement('i');
   var $entryNotes = document.createElement('p');
+  $entryListItem.setAttribute('data-entry-id', entry.entryId);
   $entryRow.setAttribute('class', 'row');
   $entryPhotoContainer.setAttribute('class', 'column-half');
   $entryPhoto.setAttribute('class', 'border-round');
