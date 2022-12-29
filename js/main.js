@@ -62,6 +62,9 @@ function DOMContentHandler(event) {
     var entryDOMTree = renderEntry(data.entries[entriesIndex]);
     $entryList.appendChild(entryDOMTree);
     viewSwap(data.view);
+    if (data.entries.length > 0 && $displayNoEntries.getAttribute('class') !== 'hidden') {
+      toggleNoEntries();
+    }
   }
 }
 
