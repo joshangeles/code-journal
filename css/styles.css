@@ -13,8 +13,8 @@ body main.container {
 }
 
 img {
-  height: 25vh;
-  width: 100%;
+  height: auto;
+  max-width: 100%;
 }
 
 form > div {
@@ -40,22 +40,55 @@ textarea {
   margin-top: 0.75rem;
 }
 
-input[type="submit"] {
+input[type="text"]:focus,
+textarea:focus {
+  outline-color: #562b81;
+}
+
+input[type="submit"],
+input[type="button"] {
   background-color: #562b81;
   color: white;
   border-radius: 0.25rem;
   border-color: transparent;
-  width: 22%;
+  width: 15%;
   padding: 0.5rem;
   margin-top: 1rem;
+}
+
+input[type="button"] {
+  width: auto;
+  margin-top: 0;
 }
 
 header {
   background-color: #562b81;
 }
 
+li {
+  list-style: none;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+a,
+h3,
+h1 {
+  display: inline-block;
+}
+
+a {
+  padding-left: 1rem;
+}
+
+a:hover,
+input[type="button"],
+input[type="submit"] {
+  cursor: pointer;
+}
+
 .cover {
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .text-align-start {
@@ -66,16 +99,20 @@ header {
   text-align: center;
 }
 
-.justify-center {
-  justify-content: center;
-}
-
 .align-items-center {
   align-items: center;
 }
 
+.flex {
+  display: flex;
+}
+
 .justify-flex-end {
   justify-content: flex-end;
+}
+
+.justify-space-between {
+  justify-content: space-between;
 }
 
 .border-round {
@@ -96,7 +133,8 @@ header {
 }
 
 @media screen and (min-width: 768px) {
-  input[type="submit"] {
+  input[type="submit"],
+  input [type="button"] {
     padding: 0.5rem;
     width: 4.5rem;
     margin-top: 1rem;
@@ -118,7 +156,8 @@ header {
   }
 
   h1,
-  h3 {
+  h3,
+  a {
     padding: 0 0.75rem;
   }
 
