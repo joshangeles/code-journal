@@ -61,6 +61,7 @@ function DOMContentHandler(event) {
   for (var entriesIndex = 0; entriesIndex < data.entries.length; entriesIndex++) {
     var entryDOMTree = renderEntry(data.entries[entriesIndex]);
     $entryList.appendChild(entryDOMTree);
+    viewSwap(data.view);
   }
 }
 
