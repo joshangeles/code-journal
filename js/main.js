@@ -21,6 +21,8 @@ function submitHandler(event) {
     $entryList.prepend($newEntry);
     viewSwap('entries');
     toggleNoEntries();
+  } else {
+    entry.entryId = data.editing.entryId;
   }
 }
 $photoURLInput.addEventListener('input', previewImageHandler);
