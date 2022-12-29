@@ -8,22 +8,27 @@ function previewImageHandler(event) {
 function submitHandler(event) {
   event.preventDefault();
   var entry = {};
+  entry.title = $entryForm.elements.title.value;
+  entry.photo = $entryForm.elements.photo.value;
+  entry.notes = $entryForm.elements.notes.value;
   if (data.editing === null) {
-    entry.title = $entryForm.elements.title.value;
-    entry.photo = $entryForm.elements.photo.value;
-    entry.notes = $entryForm.elements.notes.value;
     entry.entryId = data.nextEntryId;
     data.nextEntryId++;
-    data.entries.unshift(entry);
-    $previewImage.setAttribute('src', 'images/placeholder-image-square.jpg');
-    $entryForm.reset();
-    var $newEntry = renderEntry(entry);
-    $entryList.prepend($newEntry);
-    viewSwap('entries');
-    toggleNoEntries();
   } else {
     entry.entryId = data.editing.entryId;
+    for (var i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].entryId === entry.entryId) {
+        data.entries.splice(i, 1);
+      }
+    }
   }
+  data.entries.unshift(entry);
+  $previewImage.setAttribute('src', 'images/placeholder-image-square.jpg');
+  $entryForm.reset();
+  var $newEntry = renderEntry(entry);
+  $entryList.prepend($newEntry);
+  viewSwap('entries');
+  toggleNoEntries();
 }
 $photoURLInput.addEventListener('input', previewImageHandler);
 $entryForm.addEventListener('submit', submitHandler);
