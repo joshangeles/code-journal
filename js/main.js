@@ -117,6 +117,10 @@ function editHandler(event) {
     for (var i = 0; i < data.entries.length; i++) {
       if (data.entries[i].entryId === Number(editedEntryId)) {
         data.editing = data.entries[i];
+        $previewImage.setAttribute('src', data.editing.photo);
+        $entryForm.elements.title.value = data.editing.title;
+        $entryForm.elements.photo.value = data.editing.photo;
+        $entryForm.elements.notes.value = data.editing.notes;
       }
     }
   }
