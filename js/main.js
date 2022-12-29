@@ -107,3 +107,12 @@ function viewSwapHandler(event) {
 
 $entriesAnchor.addEventListener('click', viewSwapHandler);
 $newEntryButton.addEventListener('click', viewSwapHandler);
+
+// issue-3-can-edit-entries: users can edit their entries
+function editHandler(event) {
+  if (event.target.tagName === 'I') {
+    viewSwap('entry-form');
+  }
+}
+
+$entryList.addEventListener('click', editHandler);
