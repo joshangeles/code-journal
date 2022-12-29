@@ -19,9 +19,7 @@ function submitHandler(event) {
   var $newEntry = renderEntry(entry);
   $entryList.prepend($newEntry);
   viewSwap('entries');
-  if ($entryList.hasChildNodes && $displayNoEntries.getAttribute('class') !== 'hidden') {
-    toggleNoEntries();
-  }
+  toggleNoEntries();
 }
 $photoURLInput.addEventListener('input', previewImageHandler);
 $entryForm.addEventListener('submit', submitHandler);
@@ -62,16 +60,14 @@ function DOMContentHandler(event) {
     var entryDOMTree = renderEntry(data.entries[entriesIndex]);
     $entryList.appendChild(entryDOMTree);
     viewSwap(data.view);
-    if (data.entries.length > 0 && $displayNoEntries.getAttribute('class') !== 'hidden') {
-      toggleNoEntries();
-    }
+    toggleNoEntries();
   }
 }
 
 document.addEventListener('DOMContentLoaded', DOMContentHandler);
 
 function toggleNoEntries() {
-  if ($displayNoEntries.getAttribute('class') !== 'hidden') {
+  if ($entryList.hasChildNodes) {
     $displayNoEntries.setAttribute('class', 'hidden');
   } else {
     $displayNoEntries.setAttribute('class', 'text-align-center');
@@ -89,13 +85,11 @@ function viewSwap(currentView) {
 }
 
 function viewSwapHandler(event) {
-  if (event) {
-    if (event.target.matches('#entries-view')) {
-      viewSwap('entries');
-    }
-    if (event.target.matches('#entry-form-view')) {
-      viewSwap('entry-form');
-    }
+  if (event.target.matches('#entries-view')) {
+    viewSwap('entries');
+  }
+  if (event.target.matches('#entry-form-view')) {
+    viewSwap('entry-form');
   }
 }
 
