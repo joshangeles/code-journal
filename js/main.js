@@ -110,9 +110,17 @@ $newEntryButton.addEventListener('click', viewSwapHandler);
 
 // issue-3-can-edit-entries: users can edit their entries
 function editHandler(event) {
+  var $currentlyEditedEntry = event.target.closest('li[data-entry-id]');
+  var editedEntryId = $currentlyEditedEntry.getAttribute('data-entry-id');
   if (event.target.tagName === 'I') {
     viewSwap('entry-form');
+    for (var i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].entryId === Number(editedEntryId)) {
+        data.editing = data.entries[i];
+      }
+    }
   }
+
 }
 
 $entryList.addEventListener('click', editHandler);
