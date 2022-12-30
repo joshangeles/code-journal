@@ -17,10 +17,8 @@ function submitHandler(event) {
     data.nextEntryId++;
     data.entries.unshift(entry);
     $previewImage.setAttribute('src', 'images/placeholder-image-square.jpg');
-    $entryForm.reset();
     var $newEntry = renderEntry(entry);
     $entryList.prepend($newEntry);
-    viewSwap('entries');
     toggleNoEntries();
   }
   if (data.editing !== null) {
@@ -34,7 +32,11 @@ function submitHandler(event) {
     $newEntry = renderEntry(entry);
     var $outdatedEntry = $entryList.querySelector('li[data-entry-id="' + entry.entryId + '"]');
     $outdatedEntry.replaceWith($newEntry);
+    $entryFormHeader.textContent = 'New Entry';
+    data.editing = null;
   }
+  viewSwap('entries');
+  $entryForm.reset();
 }
 $photoURLInput.addEventListener('input', previewImageHandler);
 $entryForm.addEventListener('submit', submitHandler);
