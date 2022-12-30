@@ -31,6 +31,9 @@ function submitHandler(event) {
     entry.entryId = data.editing.entryId;
     var matchingEntryIndex = data.entries.findIndex(obj => obj.toString() === data.editing.toString());
     data.entries.splice(matchingEntryIndex, 1, entry);
+    $newEntry = renderEntry(entry);
+    var $outdatedEntry = $entryList.querySelector('li[data-entry-id="' + entry.entryId + '"]');
+    $outdatedEntry.replaceWith($newEntry);
   }
 }
 $photoURLInput.addEventListener('input', previewImageHandler);
