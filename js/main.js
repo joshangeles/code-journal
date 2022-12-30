@@ -2,33 +2,36 @@
 var $previewImage = document.querySelector('img#preview');
 var $photoURLInput = document.querySelector('[name="photo"]');
 var $entryForm = document.querySelector('form');
+var $entryFormHeader = $entryForm.querySelector('h1');
 function previewImageHandler(event) {
   $previewImage.setAttribute('src', $photoURLInput.value);
 }
 function submitHandler(event) {
   event.preventDefault();
-  var entry = {};
-  entry.title = $entryForm.elements.title.value;
-  entry.photo = $entryForm.elements.photo.value;
-  entry.notes = $entryForm.elements.notes.value;
   if (data.editing === null) {
+    var entry = {};
+    entry.title = $entryForm.elements.title.value;
+    entry.photo = $entryForm.elements.photo.value;
+    entry.notes = $entryForm.elements.notes.value;
     entry.entryId = data.nextEntryId;
     data.nextEntryId++;
-  } else {
-    entry.entryId = data.editing.entryId;
-    for (var i = 0; i < data.entries.length; i++) {
-      if (data.entries[i].entryId === entry.entryId) {
-        data.entries.splice(i, 1);
-      }
-    }
+    data.entries.unshift(entry);
+    $previewImage.setAttribute('src', 'images/placeholder-image-square.jpg');
+    $entryForm.reset();
+    var $newEntry = renderEntry(entry);
+    $entryList.prepend($newEntry);
+    viewSwap('entries');
+    toggleNoEntries();
   }
-  data.entries.unshift(entry);
-  $previewImage.setAttribute('src', 'images/placeholder-image-square.jpg');
-  $entryForm.reset();
-  var $newEntry = renderEntry(entry);
-  $entryList.prepend($newEntry);
-  viewSwap('entries');
-  toggleNoEntries();
+  if (data.editing !== null) {
+    entry = {};
+    entry.title = $entryForm.elements.title.value;
+    entry.photo = $entryForm.elements.photo.value;
+    entry.notes = $entryForm.elements.notes.value;
+    entry.entryId = data.editing.entryId;
+    var matchingEntryIndex = data.entries.findIndex(obj => obj.toString() === data.editing.toString());
+    data.entries.splice(matchingEntryIndex, 1, entry);
+  }
 }
 $photoURLInput.addEventListener('input', previewImageHandler);
 $entryForm.addEventListener('submit', submitHandler);
@@ -118,7 +121,7 @@ $entriesAnchor.addEventListener('click', viewSwapHandler);
 $newEntryButton.addEventListener('click', viewSwapHandler);
 
 // issue-3-can-edit-entries: users can edit their entries
-var $entryFormHeader = $entryForm.querySelector('h1');
+
 function editHandler(event) {
   var $currentlyEditedEntry = event.target.closest('li[data-entry-id]');
   var editedEntryId = $currentlyEditedEntry.getAttribute('data-entry-id');
@@ -127,15 +130,15 @@ function editHandler(event) {
     for (var i = 0; i < data.entries.length; i++) {
       if (data.entries[i].entryId === Number(editedEntryId)) {
         data.editing = data.entries[i];
-        $previewImage.setAttribute('src', data.editing.photo);
-        $entryForm.elements.title.value = data.editing.title;
-        $entryForm.elements.photo.value = data.editing.photo;
-        $entryForm.elements.notes.value = data.editing.notes;
+        $previewImage.setAttribute('src', data.entries[i].photo);
+        $entryForm.elements.title.value = data.entries[i].title;
+        $entryForm.elements.photo.value = data.entries[i].photo;
+        $entryForm.elements.notes.value = data.entries[i].notes;
         $entryFormHeader.textContent = 'Edit Entry';
       }
     }
   }
-
+  return $currentlyEditedEntry;
 }
 
 $entryList.addEventListener('click', editHandler);
