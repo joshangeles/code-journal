@@ -30,6 +30,7 @@ function submitHandler(event) {
     var matchingEntryIndex = data.entries.findIndex(obj => obj.toString() === data.editing.toString());
     data.entries.splice(matchingEntryIndex, 1, entry);
     $newEntry = renderEntry(entry);
+    $previewImage.setAttribute('src', 'images/placeholder-image-square.jpg');
     var $outdatedEntry = $entryList.querySelector('li[data-entry-id="' + entry.entryId + '"]');
     $outdatedEntry.replaceWith($newEntry);
     $entryFormHeader.textContent = 'New Entry';
