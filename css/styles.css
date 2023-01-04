@@ -148,6 +148,12 @@ input[type="submit"] {
   color: white;
 }
 
+#delete {
+  background-color: transparent;
+  color: red;
+  text-decoration: underline;
+}
+
 @media screen and (min-width: 768px) {
   input[type="submit"],
   input [type="button"] {

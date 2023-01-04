@@ -127,7 +127,7 @@ $entriesAnchor.addEventListener('click', viewSwapHandler);
 $newEntryButton.addEventListener('click', viewSwapHandler);
 
 // issue-3-can-edit-entries: users can edit their entries
-
+// issue-4-can-delete-entries: user can delete their entries
 function editHandler(event) {
   var $currentlyEditedEntry = event.target.closest('li[data-entry-id]');
   var editedEntryId = $currentlyEditedEntry.getAttribute('data-entry-id');
