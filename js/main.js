@@ -42,6 +42,7 @@ function submitHandler(event) {
   }
   viewSwap('entries');
   $entryForm.reset();
+  return $outdatedEntry;
 }
 $photoURLInput.addEventListener('input', previewImageHandler);
 $entryForm.addEventListener('submit', submitHandler);
@@ -177,8 +178,10 @@ function modalBoxHandler(event) {
     $modal.className = 'hidden';
     for (var i = 0; i < data.entries.length; i++) {
       if (data.entries[i].entryId === data.editing.entryId) {
+        var $entryForDeletion = $entryList.querySelector('li[data-entry-id="' + data.editing.entryId + '"]');
         data.editing = null;
         data.entries.splice(i, 1);
+        $entryForDeletion.remove();
       }
     }
     viewSwap('entries');
