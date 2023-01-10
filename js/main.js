@@ -3,6 +3,8 @@ var $previewImage = document.querySelector('img#preview');
 var $photoURLInput = document.querySelector('[name="photo"]');
 var $entryForm = document.querySelector('form');
 var $entryFormHeader = $entryForm.querySelector('h1');
+var $deleteEntry = document.querySelector('#delete');
+var $entryFormButtonRow = $deleteEntry.closest('div');
 function previewImageHandler(event) {
   $previewImage.setAttribute('src', $photoURLInput.value);
 }
@@ -120,6 +122,10 @@ function viewSwapHandler(event) {
   }
   if (event.target.matches('#entry-form-view')) {
     viewSwap('entry-form');
+    if ($entryFormHeader.textContent !== 'Edit Entry') {
+      $entryFormButtonRow.className = 'justify-flex-end flex';
+      $deleteEntry.className = 'text-align-center hidden';
+    }
   }
 }
 
@@ -142,6 +148,10 @@ function editHandler(event) {
         $entryForm.elements.notes.value = data.entries[i].notes;
         $entryFormHeader.textContent = 'Edit Entry';
       }
+    }
+    if ($entryFormHeader.textContent === 'Edit Entry') {
+      $entryFormButtonRow.className = 'justify-space-between flex';
+      $deleteEntry.className = 'text-align-center';
     }
   }
   return $currentlyEditedEntry;
