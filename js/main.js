@@ -103,7 +103,7 @@ function DOMContentHandler(event) {
 document.addEventListener('DOMContentLoaded', DOMContentHandler);
 
 function toggleNoEntries() {
-  if ($entryList.hasChildNodes) {
+  if ($entryList.querySelectorAll('li').length > 0) {
     $displayNoEntries.setAttribute('class', 'hidden');
   } else {
     $displayNoEntries.setAttribute('class', 'text-align-center');
@@ -182,10 +182,12 @@ function modalBoxHandler(event) {
         data.editing = null;
         data.entries.splice(i, 1);
         $entryForDeletion.remove();
+        $entryForm.reset();
+        previewImageHandler();
+        toggleNoEntries();
       }
     }
     viewSwap('entries');
-    toggleNoEntries();
   }
 }
 
