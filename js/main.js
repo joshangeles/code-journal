@@ -6,6 +6,7 @@ var $entryFormHeader = $entryForm.querySelector('h1');
 var $deleteEntry = document.querySelector('#delete');
 var $entryFormButtonRow = $deleteEntry.closest('div');
 var $modal = document.querySelector('#overlay');
+var $modalBox = document.querySelector('#modal-box');
 function previewImageHandler(event) {
   $previewImage.setAttribute('src', $photoURLInput.value);
 }
@@ -162,5 +163,12 @@ $entryList.addEventListener('click', editHandler);
 function modalHandler(event) {
   $modal.className = '';
 }
-
 $deleteEntry.addEventListener('click', modalHandler);
+
+function modalBoxHandler(event) {
+  if (event.target.tagName === 'BUTTON') {
+    $modal.className = 'hidden';
+  }
+}
+
+$modalBox.addEventListener('click', modalBoxHandler);
