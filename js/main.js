@@ -3,6 +3,10 @@ var $previewImage = document.querySelector('img#preview');
 var $photoURLInput = document.querySelector('[name="photo"]');
 var $entryForm = document.querySelector('form');
 var $entryFormHeader = $entryForm.querySelector('h1');
+var $deleteEntry = document.querySelector('#delete');
+var $entryFormButtonRow = $deleteEntry.closest('div');
+var $modal = document.querySelector('#overlay');
+var $modalBox = document.querySelector('#modal-box');
 function previewImageHandler(event) {
   $previewImage.setAttribute('src', $photoURLInput.value);
 }
@@ -38,6 +42,7 @@ function submitHandler(event) {
   }
   viewSwap('entries');
   $entryForm.reset();
+  return $outdatedEntry;
 }
 $photoURLInput.addEventListener('input', previewImageHandler);
 $entryForm.addEventListener('submit', submitHandler);
@@ -92,12 +97,13 @@ function DOMContentHandler(event) {
     viewSwap(data.view);
     toggleNoEntries();
   }
+  return entryDOMTree;
 }
 
 document.addEventListener('DOMContentLoaded', DOMContentHandler);
 
 function toggleNoEntries() {
-  if ($entryList.hasChildNodes) {
+  if ($entryList.querySelectorAll('li').length > 0) {
     $displayNoEntries.setAttribute('class', 'hidden');
   } else {
     $displayNoEntries.setAttribute('class', 'text-align-center');
@@ -120,6 +126,10 @@ function viewSwapHandler(event) {
   }
   if (event.target.matches('#entry-form-view')) {
     viewSwap('entry-form');
+    if ($entryFormHeader.textContent !== 'Edit Entry') {
+      $entryFormButtonRow.className = 'justify-flex-end flex';
+      $deleteEntry.className = 'text-align-center hidden';
+    }
   }
 }
 
@@ -127,7 +137,7 @@ $entriesAnchor.addEventListener('click', viewSwapHandler);
 $newEntryButton.addEventListener('click', viewSwapHandler);
 
 // issue-3-can-edit-entries: users can edit their entries
-
+// issue-4-can-delete-entries: user can delete their entries
 function editHandler(event) {
   var $currentlyEditedEntry = event.target.closest('li[data-entry-id]');
   var editedEntryId = $currentlyEditedEntry.getAttribute('data-entry-id');
@@ -143,8 +153,42 @@ function editHandler(event) {
         $entryFormHeader.textContent = 'Edit Entry';
       }
     }
+    if ($entryFormHeader.textContent === 'Edit Entry') {
+      $entryFormButtonRow.className = 'justify-space-between flex';
+      $deleteEntry.className = 'text-align-center';
+    }
   }
   return $currentlyEditedEntry;
 }
-
 $entryList.addEventListener('click', editHandler);
+
+function modalHandler(event) {
+  $modal.className = '';
+}
+$deleteEntry.addEventListener('click', modalHandler);
+
+var $cancelButton = document.querySelector('#cancel');
+var $confirmButton = document.querySelector('#confirm');
+
+function modalBoxHandler(event) {
+  if (event.target === $cancelButton) {
+    $modal.className = 'hidden';
+  }
+  if (event.target === $confirmButton) {
+    $modal.className = 'hidden';
+    for (var i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].entryId === data.editing.entryId) {
+        var $entryForDeletion = $entryList.querySelector('li[data-entry-id="' + data.editing.entryId + '"]');
+        data.editing = null;
+        data.entries.splice(i, 1);
+        $entryForDeletion.remove();
+        $entryForm.reset();
+        previewImageHandler();
+        toggleNoEntries();
+      }
+    }
+    viewSwap('entries');
+  }
+}
+
+$modalBox.addEventListener('click', modalBoxHandler);
