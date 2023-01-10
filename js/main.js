@@ -96,6 +96,7 @@ function DOMContentHandler(event) {
     viewSwap(data.view);
     toggleNoEntries();
   }
+  return entryDOMTree;
 }
 
 document.addEventListener('DOMContentLoaded', DOMContentHandler);
@@ -137,7 +138,7 @@ $newEntryButton.addEventListener('click', viewSwapHandler);
 // issue-3-can-edit-entries: users can edit their entries
 // issue-4-can-delete-entries: user can delete their entries
 function editHandler(event) {
-  var $currentlyEditedEntry = event.target.closest('li[data-entry-id]'); // has to do with this probably
+  var $currentlyEditedEntry = event.target.closest('li[data-entry-id]');
   var editedEntryId = $currentlyEditedEntry.getAttribute('data-entry-id');
   if (event.target.tagName === 'I') {
     viewSwap('entry-form');
@@ -165,12 +166,21 @@ function modalHandler(event) {
 }
 $deleteEntry.addEventListener('click', modalHandler);
 
+var $cancelButton = document.querySelector('#cancel');
+var $confirmButton = document.querySelector('#confirm');
+
 function modalBoxHandler(event) {
-  if (event.target.tagName === 'BUTTON') {
+  if (event.target === $cancelButton) {
     $modal.className = 'hidden';
   }
-  if (event.target.textContent === 'CONFIRM') {
-    editHandler.$currentlyEditedEntry.remove(); // this isnt working
+  if (event.target === $confirmButton) {
+    $modal.className = 'hidden';
+    for (var i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].entryId === data.editing.entryId) {
+        data.editing = null;
+        data.entries.splice(i, 1);
+      }
+    }
     viewSwap('entries');
     toggleNoEntries();
   }
